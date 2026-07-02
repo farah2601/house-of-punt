@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>House of Punt · Olibanum Intelligence</title>
+<meta name="description" content="House of Punt is built around one belief: that the oldest intelligence in skincare was never lost.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Inter:wght@200;300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --hop-porselen: #F6F3ED;
+    --hop-porselen-hev: #FDFBF7;
+    --hop-stein: #DDD6C9;
+    --hop-ink: #1C1A16;
+    --hop-ink-myk: #4A463D;
+    --hop-graa: #6B6558;
+    --hop-rav: #A07A3B;
+    --hop-rav-hover: #8A6730;
+    --hop-rav-tekst: #7A5A28;
+    --hop-rav-flate: #F0E7D6;
+    --hop-border: #E3DDD0;
+    --hop-border-sterk: #CBC3B2;
+    --hop-midnatt: #171A21;
+    --hop-midnatt-hev: #21252E;
+    --hop-krem: #F2EDE3;
+    --hop-gull: #BFA268;
+    --hop-skifer: #3A4152;
+    --hop-suksess: #5F6F52;
+    --hop-feil: #9C4A32;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--hop-porselen);
+    color: var(--hop-ink);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .display {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--hop-graa);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 1.1s ease, transform 1.1s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* NAV */
+  header.nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 5vw;
+    background: rgba(246, 243, 237, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .nav-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 17px;
+    letter-spacing: 0.5em;
+    color: var(--hop-ink);
+    white-space: nowrap;
+  }
+  .nav-meta {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--hop-ink-myk);
+    white-space: nowrap;
+  }
+
+  section { position: relative; }
+
+  /* HERO */
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 160px 6vw 80px;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 7vw, 88px);
+    line-height: 1.08;
+    color: var(--hop-ink);
+    max-width: 16ch;
+  }
+  .hero .subline {
+    font-style: italic;
+    font-size: clamp(20px, 2.4vw, 28px);
+    color: var(--hop-rav-tekst);
+    margin-top: 22px;
+  }
+  .hero .body {
+    font-size: 16px;
+    color: var(--hop-ink-myk);
+    max-width: 46ch;
+    margin: 34px auto 0;
+    font-weight: 300;
+  }
+  .hero form {
+    margin-top: 48px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  input.field {
+    width: 320px;
+    max-width: 78vw;
+    background: var(--hop-porselen-hev);
+    border: 1px solid var(--hop-border-sterk);
+    padding: 15px 18px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: var(--hop-ink);
+    outline: none;
+  }
+  input.field:focus {
+    border-color: var(--hop-rav);
+    box-shadow: 0 0 0 1px var(--hop-rav);
+  }
+  input.field::placeholder { color: var(--hop-graa); }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--hop-ink);
+    color: var(--hop-porselen);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 16px 34px;
+    border: 1px solid var(--hop-ink);
+    cursor: pointer;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+  .btn-primary:hover { background: transparent; color: var(--hop-ink); }
+
+  .btn-gold {
+    display: inline-block;
+    background: transparent;
+    color: var(--hop-gull);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 16px 34px;
+    border: 1px solid var(--hop-gull);
+    cursor: pointer;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+  .btn-gold:hover { background: var(--hop-gull); color: var(--hop-midnatt); }
+
+  .confirm {
+    margin-top: 20px;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color: var(--hop-suksess);
+    min-height: 18px;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .confirm.show { opacity: 1; }
+
+  /* ORIGIN */
+  .origin {
+    padding: 160px 6vw;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .origin .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(120px, 22vw, 260px);
+    color: var(--hop-stein);
+    line-height: 0.85;
+    margin: 18px 0 0;
+    user-select: none;
+  }
+  .origin h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    color: var(--hop-ink);
+    margin-top: 8px;
+  }
+  .origin p {
+    font-size: 16px;
+    color: var(--hop-ink-myk);
+    max-width: 56ch;
+    margin: 30px auto 0;
+  }
+
+  /* PUNT COMPLEX */
+  .complex {
+    background: var(--hop-rav-flate);
+    padding: 140px 6vw;
+  }
+  .complex-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .complex h2 {
+    font-size: clamp(30px, 4.5vw, 46px);
+    color: var(--hop-ink);
+    margin-top: 8px;
+  }
+  .complex > .complex-inner > p {
+    font-size: 16px;
+    color: var(--hop-ink-myk);
+    max-width: 58ch;
+    margin: 30px auto 0;
+  }
+  .complex-cols {
+    margin-top: 90px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .complex-cols .col {
+    border-top: 1px solid var(--hop-border-sterk);
+    padding-top: 22px;
+    text-align: left;
+  }
+  .complex-cols .col b {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--hop-ink);
+    margin-bottom: 10px;
+  }
+  .complex-cols .col span {
+    font-size: 14px;
+    color: var(--hop-ink-myk);
+  }
+
+  /* PRECISION DRAW — MIDNATT */
+  .precision {
+    background: var(--hop-midnatt);
+    color: var(--hop-krem);
+    padding: 180px 6vw;
+    text-align: center;
+  }
+  .precision .eyebrow { color: var(--hop-gull); }
+  .precision h2 {
+    font-size: clamp(32px, 5vw, 54px);
+    color: var(--hop-krem);
+    margin-top: 10px;
+  }
+  .precision p {
+    font-size: 16px;
+    color: var(--hop-krem);
+    opacity: 0.82;
+    max-width: 50ch;
+    margin: 30px auto 46px;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--hop-border);
+    padding: 34px 6vw;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  footer, footer a {
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--hop-graa);
+    text-decoration: none;
+  }
+
+  @media (max-width: 720px) {
+    header.nav { padding: 22px 6vw; }
+    .nav-mark { letter-spacing: 0.3em; font-size: 15px; }
+    .hero { padding-top: 130px; }
+    .complex-cols { grid-template-columns: 1fr; gap: 40px; margin-top: 60px; }
+    .origin, .complex, .precision { padding-left: 7vw; padding-right: 7vw; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-mark">House of Punt</div>
+  <div class="nav-meta">Ta Netjer · MMXXVI</div>
+</header>
+
+<section class="hero">
+  <p class="eyebrow reveal">House of Punt</p>
+  <h1 class="display reveal">The oldest<br>intelligence.</h1>
+  <p class="subline display reveal">Skin held in balance.</p>
+  <p class="body reveal">The Egyptians crossed the Red Sea — not for gold, but for frankincense. That origin remains.</p>
+
+  <form class="reveal" id="access-form">
+    <input class="field" type="email" required placeholder="Your email" aria-label="Email address">
+    <button class="btn-primary" type="submit">Request access</button>
+  </form>
+  <p class="confirm" id="confirm-msg">You are on the list.</p>
+</section>
+
+<section class="origin">
+  <p class="eyebrow reveal">The origin</p>
+  <div class="display num reveal">3000</div>
+  <h2 class="display reveal">Ta Netjer. God's Land.</h2>
+  <p class="display reveal" style="font-style:italic; font-size:clamp(18px,2.2vw,24px); color:var(--hop-rav-tekst); margin-top:18px;">Before Paris. Before Rome. There was Punt.</p>
+  <p class="reveal">The ancient land associated with the Horn of Africa. The source the Egyptians sailed toward. Frankincense, myrrh, and aromatic resins, considered among the most valuable substances of the ancient world. Not because they were rare. Because of their perceived restorative power. That source remains.</p>
+</section>
+
+<section class="complex">
+  <div class="complex-inner">
+    <p class="eyebrow reveal">The Punt Complex</p>
+    <h2 class="display reveal">Olibanum Intelligence.</h2>
+    <p class="reveal">At the center of every House of Punt formulation is Boswellia Carterii Oil — sourced from the Horn of Africa, studied for its boswellic acids and their role in calming inflammatory signaling. Around it: Squalane for barrier support. Argania Spinosa Kernel Oil and Rosa Canina Seed Oil for deep restoration. Simmondsia Chinensis Seed Oil for balance. Anthemis Nobilis Flower Oil for visible calm. Tetrahexyldecyl Ascorbate — an oil-soluble form of Vitamin C that penetrates where it matters most. Tocopherol to protect the intelligence within.</p>
+
+    <div class="complex-cols">
+      <div class="col reveal">
+        <b>Boswellia carterii</b>
+        <span>The resin at the center of the formulation.</span>
+      </div>
+      <div class="col reveal">
+        <b>The Punt Complex</b>
+        <span>Ancient knowing. Precise delivery.</span>
+      </div>
+      <div class="col reveal">
+        <b>Ta Netjer</b>
+        <span>The land the resin was carried from.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="precision">
+  <p class="eyebrow reveal">The Precision Draw System</p>
+  <h2 class="display reveal">Hidden until the moment of use.</h2>
+  <p class="reveal">The pipette is concealed. The bottle is complete, a sculptural object with no visible mechanism. One precise gesture, and it materialises. This is not convenience. This is the ritual.</p>
+  <button class="btn-gold reveal">Witness the reveal</button>
+</section>
+
+<footer>
+  <span>House of Punt · Pre-launch · Europe · MMXXVI</span>
+  <a href="mailto:Farah@houseofpunt.com">Farah@houseofpunt.com</a>
+  <span>@houseofpunt</span>
+</footer>
+
+<script>
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach(function (el, i) {
+      el.style.transitionDelay = (i % 6) * 90 + 'ms';
+      io.observe(el);
+    });
+
+    var form = document.getElementById('access-form');
+    var confirm = document.getElementById('confirm-msg');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      confirm.classList.add('show');
+      form.querySelector('input').value = '';
+    });
+
+    var revealBtn = document.querySelector('.btn-gold');
+    revealBtn.addEventListener('click', function () {
+      document.querySelector('.precision').scrollIntoView({ behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>
